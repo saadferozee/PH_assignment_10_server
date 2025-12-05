@@ -65,6 +65,12 @@ async function run() {
             const result = await listings.find(query).toArray()
             res.send(result)
         })
+        app.delete('/listings/delete/:id', async (req, res) => {
+            const id = req.params
+            const query = { _id: new ObjectId(id) }
+            const result = await listings.deleteOne(query)
+            res.send(result)
+        })
         
         const database2 = client.db('orders')
         const orders = database2.collection('product-orders')
